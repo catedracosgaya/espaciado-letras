@@ -1,0 +1,932 @@
+/*! HTML5 Boilerplate v4.3.0 | MIT License | http://h5bp.com/ */
+
+/*
+ * What follows is the result of much research on cross-browser styling.
+ * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
+ * Kroc Camen, and the H5BP dev community and team.
+ */
+
+/* ==========================================================================
+   Base styles: opinionated defaults
+   ========================================================================== */
+
+
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Lato Light'), local('Lato-Light'), url(../webfonts/Lato-Light.woff2) format('woff2'), url(../webfonts/Lato-Light.woff) format('woff');
+}
+@font-face {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Lato Regular'), local('Lato-Regular'), url(../webfonts/Lato-Regular.woff2) format('woff2'), url(../webfonts/Lato-Regular.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'Rosario';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Rosario Regular'), local('Rosario-Regular'), url(../webfonts/Rosario-Regular.woff2) format('woff2'), url(../webfonts/Rosario-Regular.woff) format('woff');
+}
+@font-face {
+    font-family: 'Rosario';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Rosario Bold'), local('Rosario-Bold'), url(../webfonts/Rosario-Bold.woff2) format('woff2'), url(../webfonts/Rosario-Bold.woff) format('woff');
+}
+@font-face {
+    font-family: 'Rosario';
+    font-style: italic;
+    font-weight: 400;
+    src: local('Rosario Italic'), local('Rosario-Italic'), url(../webfonts/Rosario-Italic.woff2) format('woff2'), url(../webfonts/Rosario-Italic.woff) format('woff');
+}
+@font-face {
+    font-family: 'Rosario';
+    font-style: italic;
+    font-weight: 700;
+    src: local('Rosario Bold Italic'), local('Rosario-BoldItalic'), url(../webfonts/Rosario-BoldItalic.woff2) format('woff2'), url(../webfonts/Rosario-BoldItalic.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'Chivo';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Chivo Regular'), local('Chivo-Regular'), url(../webfonts/Chivo-Regular.woff2) format('woff2'), url(../webfonts/Chivo-Regular.woff) format('woff');
+}
+@font-face {
+    font-family: 'Chivo';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Chivo Bold'), local('Chivo-Bold'), url(../webfonts/Chivo-Bold.woff2) format('woff2'), url(../webfonts/Chivo-Bold.woff) format('woff');
+}
+
+
+
+
+
+html {
+    color: #000000;
+    font-family: 'Rosario', sans-serif;
+    font-size: 1em;
+    line-height: 1.3;
+    -webkit-font-smoothing:antialiased;
+}
+
+
+
+::-moz-selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+::selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+audio,
+canvas,
+img,
+svg,
+video {
+    vertical-align: middle;
+}
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+textarea {
+    resize: vertical;
+}
+
+
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+a,
+a:active,
+a:hover,
+a:focus{
+    outline:none;
+}
+
+
+html, body{
+    height:100%;
+    width:100%;
+}
+body{
+    background-color:#999999;
+    overflow:hidden;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
+
+
+/* Tablero ----------------------------------------------------------------- */
+#tablero{
+    height: calc(100% - 44px);
+    margin-left:14px;
+    margin-top:44px;
+    overflow: auto;
+    width: calc(100% - 14px);
+}
+
+
+
+
+/* Hoja -------------------------------------------------------------------- */
+#hoja{
+    background-color:#FFFFFF;
+    -webkit-box-shadow: 0 0 8px rgba(0,0,0,0.8);
+    -moz-box-shadow: 0 0 8px rgba(0,0,0,0.8);
+    box-shadow: 0 0 8px rgba(0,0,0,0.8);
+    display:block;
+    height:708px;
+    margin:0 auto;
+    position:relative;
+    width:1000px;
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -ms-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+}
+.hoja_girar_efecto{
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+}
+.hoja_no_efecto{
+    -webkit-transition: none !important;
+    -moz-transition: none !important;
+    -ms-transition: none !important;
+    transition: none !important;
+}
+
+
+
+
+/* Cursor ------------------------------------------------------------------ */
+.guion .objeto,
+.signo .objeto,
+.rotulo .objeto,
+#texto{
+    cursor:default;
+}
+#texto{
+    cursor: move;
+    cursor: -webkit-grab;
+    cursor: -moz-grab;
+    cursor: grab;
+}
+#texto:active{
+    cursor: move;
+    cursor: -webkit-grabbing;
+    cursor: -moz-grabbing;
+    cursor: grabbing;
+}
+
+
+.navegador_IE .signo,
+.navegador_IE .signo span{
+    pointer-events:auto;
+}
+
+
+
+
+/* Rotulo --------------------------------------------------------------------- */
+.rotulo{
+    color:#000000;
+    display:block;
+    font-size:7.56px;
+    height:auto !important;
+    left:0;
+    line-height:7.56px;
+    margin:0;
+    padding:0;
+    position:absolute;
+    top:0;
+    white-space:nowrap;
+    width:auto !important;
+    z-index:5;
+}
+.rotulo:hover{
+    z-index:6;
+}
+
+
+
+
+/* Signos ------------------------------------------------------------------ */
+.signo,
+.guion{
+    display:block;
+    font-family:'Lato',sans-serif;
+    font-size:29px;
+    font-weight:400;
+    height:auto !important;
+    line-height:29px;
+    position:absolute;
+    width:auto !important;
+    z-index:5;
+}
+.signo:hover,
+.guion:hover{
+    z-index:6;
+}
+.signo span,
+.guion span{
+    color:#000000;
+    display:inline-block;
+    text-align:left;
+    width:auto;
+}
+.signo:hover span,
+.guion:hover span,
+.rotulo:hover,
+.seleccion .signo span,
+.seleccion .guion span,
+.seleccion .rotulo span,
+.seleccion:hover .elemento,
+.grupo:hover .agrupado{
+    text-shadow: -1px 0 #99CC33, 0 1px #99CC33, 1px 0 #99CC33, 0 -1px #99CC33;
+}
+
+
+
+
+/* Objeto Seleccionado ----------------------------------------------------- */
+.signo.seleccionado span,
+.guion.seleccionado span,
+.rotulo.seleccionado span,
+.guion.seleccion_borrar span{
+    position:relative;
+}
+.signo.seleccionado span:after,
+.guion.seleccionado span:after,
+.rotulo.seleccionado span:after,
+.guion.seleccion_borrar span:after{
+    border:1px dotted #99CC33;
+    content: "";
+    display:block;
+    height:100%;
+    left:-5px;
+    padding:4px;
+    position:absolute;
+    top:-5px;
+    width:100%;
+}
+.guion.seleccion_borrar span:after{
+    border:1px dotted #FF0000;
+}
+.guion.seleccion_borrar:hover span:after{
+    border-style:solid;
+}
+.guion.seleccion_borrar:hover span{
+    text-shadow:none;
+}
+.guion.seleccion_borrar b{
+    background-color:#FF0000;
+    background-image:url(../img/icono_cruz.svg);
+    background-position:center center;
+    background-repeat:no-repeat;
+    border-radius:50%;
+    border:2px solid #FFFFFF;
+    cursor: pointer;
+    display:block;
+    font-size:12px;
+    font-weight:normal;
+    height:12px;
+    position:absolute;
+    right:-11px;
+    top:-11px;
+    width:12px;
+    z-index:20;
+}
+.guion.seleccion_borrar b:hover{
+    background-color:#000000;
+}
+
+
+
+
+/* Guia Cercana ------------------------------------------------------------ */
+.signo.guia_cercana span:after,
+.guion.guia_cercana span:after,
+.rotulo.guia_cercana span:after,
+.seleccion.guia_cercana .conjunto:after,
+.grupo.guia_cercana .subgrupo:after,
+.grupo.guia_cercana:hover .subgrupo:after,
+.seleccion .grupo:hover .subgrupo:after{
+    border-color: transparent !important;
+}
+.signo.guia_cercana span,
+.guion.guia_cercana span,
+.rotulo.guia_cercana span,
+.seleccion.guia_cercana .conjunto .elemento span,
+.grupo.guia_cercana .subgrupo .agrupado span{
+    text-shadow: -1px 0 rgba(74,255,255,1), 0 1px rgba(74,255,255,1), 1px 0 rgba(74,255,255,1), 0 -1px rgba(74,255,255,1) !important;
+}
+.seleccion.guia_cercana,
+.grupo.guia_cercana{
+    background-color:transparent !important;
+}
+
+
+
+
+/* Guion Animacion --------------------------------------------------------- */
+.guion_animacion{
+    pointer-events:none;
+    position:absolute;
+    z-index: 10;
+}
+
+
+
+
+
+
+
+
+/* Selector ---------------------------------------------------------------- */
+.selector_marco{
+    cursor: default !important;
+    display: none;
+    position: absolute !important;
+    z-index: 9000;
+}
+.selector_marco > div{
+    left: 0px !important;
+    position: absolute;
+    top: 2px !important;
+}
+.selector_marco > span{
+    background-color: rgba(153, 204, 51, 0.1);
+    border: 1px dashed #99CC33;
+    float: left;
+    height: 100%;
+    width: 100%;
+}
+.selector_activo{
+    display: block !important;
+}
+
+
+
+
+/* Seleccion y Grupo ------------------------------------------------------- */
+.seleccion,
+.grupo{
+    display:none;
+    left:0;
+    position:absolute;
+    top:0;
+    z-index:3;
+}
+.seleccion .conjunto,
+.grupo .subgrupo{
+    height:100%;
+    position:relative;
+    width:100%;
+}
+.seleccion .conjunto:after,
+.grupo .subgrupo:after{
+    content: "";
+    display:block;
+    height:100%;
+    left:-5px;
+    padding:4px;
+    position:absolute;
+    top:-5px;
+    width:100%;
+}
+
+.seleccion{
+    background-color: rgba(153, 204, 51, 0.1);
+}
+.grupo.seleccionado{
+    background-color: rgba(204, 204, 204, 0.2);
+}
+.seleccion .conjunto:after{
+    border:1px dotted #99CC33;
+}
+.grupo.seleccionado .subgrupo:after{
+    border:1px dotted #999999;
+}
+
+
+
+
+
+/* Reglas ------------------------------------------------------------------ */
+.regla{
+    background-color:#4D4D4D;
+    display:block;
+    position:fixed;
+    z-index:9000;
+}
+.regla_horizontal{
+    height:14px;
+    left:0;
+    top:30px;
+    width:100%;
+}
+.regla_vertical{
+    height:100%;
+    left:0;
+    top:0;
+    width:14px;
+}
+#regla_guias_visibilidad{
+    background-color:#414141;
+    content: "";
+    cursor: pointer;
+    display:block;
+    height:14px;
+    left:0;
+    position:absolute;
+    top:30px;
+    width:14px;
+    z-index:9001;
+}
+#regla_guias_visibilidad:hover{
+    background-color: rgba(74,255,255,1);
+}
+.guias_icono_visible{
+    background-image:url(../img/icono_guias_visibles.svg);
+    background-position:center center;
+    background-repeat:no-repeat;
+}
+.guias_icono_invisible{
+    background-image:url(../img/icono_guias_invisibles.svg);
+    background-position:center center;
+    background-repeat:no-repeat;
+}
+
+
+
+
+
+
+/* Guias ------------------------------------------------------------------- */
+.guia{
+    border-color:rgba(204,204,204,0.6);
+    display:block;
+    position:absolute;
+    z-index:0;
+}
+.guia_original:hover{
+    border-color:rgba(74,255,255,1);
+}
+.guia_duplicada{
+    border-color:rgba(74,255,255,1);
+}
+.guia_horizontal{
+    border-top-style: solid;
+    border-top-width: 1px;
+    cursor:n-resize;
+    height:4px;
+    left:0;
+    top:6px;
+    width:100%;
+}
+.guia_vertical{
+    border-left-style: solid;
+    border-left-width: 1px;
+    cursor:e-resize;
+    height:100%;
+    left:6px;
+    top:0;
+    width:4px;
+}
+.guia_duplicada span{
+    background-color:rgba(74,255,255,0.5);
+    color:#000000;
+    display:none;
+    font-family:'Lato',sans-serif;
+    font-size:9px;
+    left:0;
+    padding:2px 4px;
+    position:absolute;
+    top:0;
+    white-space:nowrap;
+}
+
+.guia_duplicada.guia_borrar{
+    border-color:rgba(255,0,0,1);
+}
+.guia_duplicada.guia_borrar span{
+    background-color:rgba(255,0,0,1);
+    color:#FFFFFF;
+}
+.guia_horizontal.guia_borrar{
+    border-top-width: 3px;
+}
+.guia_vertical.guia_borrar{
+    border-left-width: 3px;
+}
+.guia_duplicada.guia_bloqueada{
+    pointer-events:none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* Resaltador Signos ------------------------------------------------------- */
+.resaltador{
+    background-color:rgba(255,255,0,0.5);
+    z-index: 2;
+    -webkit-transition: transform .2s;
+    -moz-transition: transform .2s;
+    -ms-transition: transform .2s;
+    transition: transform .2s;
+    -webkit-transform: scale(1.4);
+    -ms-transform: scale(1.4);
+    transform: scale(1.4);
+}
+
+
+
+
+/* Texto ------------------------------------------------------------------- */
+#texto{
+    -moz-box-shadow: 0 0 6px rgba(0,0,0,0.4);
+    -webkit-box-shadow: 0 0 6px rgba(0,0,0,0.4);
+    background-color:rgba(250,255,242,0.95);
+    box-shadow: 0 0 6px rgba(0,0,0,0.4);
+    display:none;
+    font-family:'Lato',sans-serif;
+    font-size:15px;
+    font-weight:400;
+    left:14px;
+    padding:14px;
+    position:absolute;
+    top:44px;
+    width:300px;
+    z-index: 9300;
+    -webkit-transition: box-shadow .2s ease-in-out;
+    -moz-transition: box-shadow .2s ease-in-out;
+    -ms-transition: box-shadow .2s ease-in-out;
+    transition: box-shadow .2s ease-in-out;
+}
+#texto:hover{
+    box-shadow: 0 0 6px rgba(0,0,0,0.8);
+}
+#texto .cerrar{
+    color:#99CC33;
+    cursor:pointer;
+    display:block;
+    font-size:22px;
+    height:20px;
+    line-height:20px;
+    position:absolute;
+    right:0;
+    text-align:center;
+    top:0;
+    width:20px;
+}
+#texto .cerrar:hover{
+    color:#000000;
+}
+
+#texto p{
+    margin:0 0 10px 0;
+    padding:0;
+}
+#texto .texto_contenedor p:last-child{
+    margin-bottom:0;
+}
+#textmenu.texto_abierto a{
+    background-color:#EEEEEE;
+}
+
+
+
+
+
+
+
+
+/* Menu -------------------------------------------------------------------- */
+#menu{
+    background-color:#333333;
+    display:block;
+    font-family: 'Chivo', sans-serif;
+    font-weight:400;
+    position:fixed;
+    text-align:center;
+    top:0;
+    width:100%;
+    z-index:9100;
+}
+#menu_logo{
+    display:inline-block;
+}
+#menu ul{
+    display:inline-block;
+    font-size:0;
+    list-style:none;
+    margin:0;
+    padding:0;
+}
+#menu ul li{
+    color:#E0E0E0;
+    cursor:pointer;
+    display:inline-block;
+    margin:0;
+    padding:0 4px;
+    position:relative;
+    white-space:nowrap;
+}
+#menu ul li span{
+    border:1px solid transparent;
+    font-size:0.750rem;
+    height:30px;
+    line-height:30px;
+    padding:4px 6px;
+
+    -webkit-transition: border-color .2s ease-in-out;
+    -moz-transition: border-color .2s ease-in-out;
+    -ms-transition: border-color .2s ease-in-out;
+    transition: border-color .2s ease-in-out;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+#menu ul li:hover span{
+    border-color:#666666;
+    color:#FFFFFF;
+}
+
+#menu ul li.submenu_abierto{
+    background-color:#000000;
+}
+#menu ul li.submenu_abierto:hover .subtitulo span{
+    border-color:transparent;
+}
+#menu ul li.submenu_abierto ul{
+    display:block;
+}
+
+#menu ul li ul{
+    background-color:#000000;
+    display:none;
+    left:0;
+    position:absolute;
+    top:30px;
+    width:auto;
+}
+#menu ul li ul li{
+    cursor:pointer;
+    display:block;
+    height:auto;
+    padding:10px 10px;
+    text-align:left;
+    text-decoration:none;
+}
+#menu ul li ul li:hover{
+    background-color:#99CC33;
+    color:#E0E0E0;
+}
+#menu ul li ul li span{
+    border:0;
+    display:block;
+    height:auto;
+    line-height:normal;
+    padding:0;
+}
+#menu ul li ul li.desactivado,
+#menu ul li ul li.desactivado span{
+    cursor:default;
+}
+#menu ul li ul li.desactivado:hover{
+    background-color:transparent;
+}
+#menu ul li ul li.desactivado span,
+#menu ul li ul li.desactivado:hover span{
+    color:#999999;
+}
+
+#menu ul li#menu_zoom div{
+    display:inline-block;
+}
+#menu ul li#menu_zoom #menu_zoom_cifra span{
+    border-color:transparent;
+    cursor:default;
+    padding-left:0;
+    padding-right:0;
+}
+
+
+
+
+
+
+
+
+/* Ventanas ---------------------------------------------------------------- */
+#colorbox{
+    -webkit-box-shadow: 0 0 6px rgba(0,0,0,0.4);
+    -moz-box-shadow: 0 0 6px rgba(0,0,0,0.4);
+    box-shadow: 0 0 6px rgba(0,0,0,0.4);
+}
+#cboxContent{
+    background-color:#FFFFFF !important;
+    margin-top:0;
+}
+#cboxLoadedContent{
+    background-color:#FFFFFF !important;
+    border:1px solid #666666;
+}
+#cboxLoadingOverlay{
+    background-color:#FFFFFF !important;
+}
+#cboxClose{
+    right:1px;
+    top:1px;
+}
+#cboxClose:focus{
+    outline:none;
+}
+
+.ventana_oculta {
+    display: none !important;
+    visibility: hidden;
+}
+
+.ventana{
+    padding:40px;
+    text-align:center;
+    -webkit-touch-callout: none;
+    -webkit-user-select: text;
+    -khtml-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}
+.ventana h2{
+    border-bottom:1px solid #CCCCCC;
+    display:block;
+    font-size:1.500em;
+    font-weight:400;
+    margin:0 0 30px 0;
+    padding:0 0 10px 0;
+}
+.ventana h3{
+    font-size:1em;
+    font-weight:700;
+    margin-top:30px;
+    text-align:left;
+}
+.ventana p{
+    font-size:1.125em;
+    margin:10px 0 0 0;
+}
+.ventana .botonera{
+    margin-top:40px;
+    text-align:center;
+}
+.ventana .botonera .boton:first-child{
+    margin-right:10px;
+}
+.ventana .boton{
+    background-color:#EEEEEE;
+    border:1px solid #999999;
+    cursor:pointer;
+    display:inline-block;
+    padding:2px 8px;
+    -webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -ms-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+.ventana .boton:hover{
+    background-color:#999999;
+    color:#FFFFFF;
+}
+.ventana .boton_rojo:hover{
+    background-color:#ff0000;
+}
+.ventana p a{
+    border-bottom:1px solid #CCCCCC;
+    color:#000000;
+    padding-bottom:0;
+    text-decoration:none;
+    white-space:nowrap;
+    -webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -ms-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+.ventana p a:hover{
+    border-bottom-color:#FFFFFF;
+    color:#99CC33;
+    text-decoration:none;
+}
+
+.ventana_informacion h3{
+    margin-top:40px;
+}
+.ventana_informacion p{
+    font-size:1em;
+    text-align:left;
+}
+
+.ventana_informacion .info-licencia h3{
+    margin-bottom:12px;
+}
+.ventana_informacion .info-licencia p{
+    line-height:1.6;
+    margin-top:0;
+}
+.ventana_informacion .info-licencia a{
+    white-space:normal !important;
+}
+
+.ventana_informacion .info-recursos p.enlaces{
+    line-height:1.6;
+}
+
+
+#ventana_atajos dl{
+    margin:0;
+    padding:0;
+    text-align:left;
+}
+#ventana_atajos dt{
+    clear:both;
+    float:left;
+    margin:0 6px 0 0;
+    padding:0;
+    text-align:left;
+}
+#ventana_atajos dd{
+    margin:0 0 32px 0;
+    padding:0;
+}
+#ventana_atajos dl dd:last-child{
+    margin-bottom:0;
+}
+#ventana_atajos dt span{
+    background-color:#F7F7F7;
+    border-radius: 4px;
+    border:1px solid #CCCCCC;
+    box-shadow:0 1px 1px rgba(0,0,0,0.2);
+    color:#333333;
+    display:inline-block;
+    font-family: 'Chivo', sans-serif;
+    font-size:0.875rem;
+    font-weight:400;
+    line-height:normal;
+    margin-right:3px;
+    padding:2px 6px;
+    pointer-events:none;
+    text-shadow:0 1px 0 rgba(255,255,255,1);
+}
+#ventana_atajos dt span.imagen{
+    background-color:transparent;
+    border:none;
+    box-shadow:none;
+    padding:0;
+    pointer-events:none;
+    text-shadow:none;
+}
+#ventana_atajos dt i{
+    color:#999999;
+    font-family: 'Chivo', sans-serif;
+    font-size:0.750rem;
+    font-style:normal;
+    font-weight:400;
+    margin-right:3px;
+}
+

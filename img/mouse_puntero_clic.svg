@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Cursor_x5F_Clic" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+	 y="0px" width="18px" height="22px" viewBox="0 0 18 22" enable-background="new 0 0 18 22" xml:space="preserve">
+<g>
+	<g>
+		<path d="M13.287,21.996l-2.318-5.402l-2.926,2.4V6.174l9.288,8.836l-3.751,0.465l2.318,5.402L13.287,21.996z"/>
+	</g>
+	<g>
+		<rect x="8.469" width="0.4" height="5"/>
+	</g>
+	<g>
+		<rect x="8.469" width="0.4" height="5"/>
+	</g>
+	<g>
+		<rect x="4.579" y="9.388" transform="matrix(0.7071 0.7071 -0.7071 0.7071 9.8057 0.1024)" width="0.401" height="4.999"/>
+	</g>
+	<g>
+		<rect x="0.669" y="7.799" width="5" height="0.4"/>
+	</g>
+	<g>
+		<rect x="2.281" y="3.91" transform="matrix(0.7071 0.7071 -0.7071 0.7071 4.3066 -2.1763)" width="4.999" height="0.401"/>
+	</g>
+	<g>
+		<rect x="12.357" y="1.612" transform="matrix(0.7071 0.7071 -0.7071 0.7071 6.5852 -7.6754)" width="0.401" height="4.999"/>
+	</g>
+	<g>
+		<rect x="11.668" y="7.8" width="5" height="0.4"/>
+	</g>
+	<polygon fill="#FFFFFF" points="11.284,15.301 13.707,20.945 14.848,20.457 12.425,14.811 15.554,14.424 8.843,8.039 8.843,17.303"/>
+</g>
+</svg>

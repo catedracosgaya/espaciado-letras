@@ -130,11 +130,11 @@ $version_fecha = "(02/05/2015)";
 		<p>Desarrollar el sentido del ritmo a través del reconocimiento de las relaciones espaciales óptimas entre los elementos de un texto.</p>
 		<p>Reflexionar sobre el comportamiento de las contraformas propias y compartidas, reconociendo pares problemáticos para proyectar las relaciones espaciales del conjunto.</p>
 		<p>Analizar cómo interactúan la interletra, la interpalabra, la interlínea, el color del bloque, los márgenes y el soporte en una pieza gráfica y cómo influyen en la transmisión de la información escrita.</p>
-		<p>Trabajar un bloque de texto de modo de obtener un color homogéneo y armonía en la forma de la mancha (alineación, largo de las líneas, corte de palabras y márgenes).</p>
+		<p>Trabajar un bloque de texto de modo de generar un color homogéneo y armonía en la forma de la mancha (alineación, largo de las líneas, corte de palabras y márgenes).</p>
 
 		<h3>Ejercitación</h3>
 		<p>Se compondrá el texto propuesto prestando especial atención a las relaciones espaciales. Para ello se buscará primero la interletra que permita espaciar con un color parejo todos los pares presentes en el texto. Luego, en base a esa interletra se decidirá la interpalabra y la interlínea de modo tal que se establezcan líneas horizontales de palabras pertenecientes a un bloque de color homogéneo y de fácil lectura.</p>
-		<p>En la composición, el tamaño de la caja, las relaciones espaciales, el marginado, etcétera, deberán proyectarse previamente y ser evaluados a medida que avanza el trabajo. Para esto pueden generarse e imprimirse PDF durante el proceso de trabajo.</p>
+		<p>En la composición, el tamaño de la caja, las relaciones espaciales, el marginado, etcétera, deberán proyectarse previamente y ser evaluados a medida que avanza el trabajo. Para esto pueden generarse e imprimirse PDF durante el proceso.</p>
 		<p>Se compondrá un bloque con el texto completo en no menos de 4 líneas. El mismo deberá tener color tipográfico homogéneo.</p>
 		<p>El bloque de texto, la/s línea/s de título y autor y el rótulo deberán formar parte de la composición, por lo que, además de cumplir sus respectivas funciones en la comunicación, deberán relacionarse en la puesta en página.</p>
 		<p>El trabajo se evaluará en el impreso.</p>

@@ -1,5 +1,5 @@
 # Aplicación letras: para trabajar Sensibilización a la forma y al ritmo
-Aplicación para profundizar la sensibilidad al ritmo y al espaciado a través de letras que conforman palabras y líneas pertenecientes a un mismo bloque o línea de texto.
+Aplicación para profundizar la sensibilidad al ritmo y al espaciado a través de letras que conforman palabras y líneas pertenecientes a un mismo bloque o línea de texto.  
 El objetivo es componer una puesta en página donde convivan un bloque de color homogéneo compuesto al menos de 4 líneas, la cita del texto y el rótulo.
 
 **Versión: 2.3.0 - (29/09/2015)**

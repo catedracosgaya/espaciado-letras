@@ -117,7 +117,7 @@
   ),
   'lato' => 
   array (
-    'normal' => DOMPDF_DIR . '/lib/fonts/Lato-Light',
-    'bold' => DOMPDF_DIR . '/lib/fonts/Lato-Regular',
+    'normal' => DOMPDF_DIR . '/lib/fonts/LatoLatin-Regular',
+    'bold' => DOMPDF_DIR . '/lib/fonts/LatoLatin-Black',
   ),
 ) ?>

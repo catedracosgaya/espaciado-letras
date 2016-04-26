@@ -1,13 +1,29 @@
 /* Info -------------------------------------------------------------------- */
 var infoNombre = "Cátedra Cosgaya - Aplicación Letras";
-var infoVersion = "2.2.0";
-var infoFecha = "2015";
+var infoVersion = "3.0.0";
+var infoFecha = "2016";
 
 
 
 
 /* Texto TP ---------------------------------------------------------------- */
-var texto = "Cuando lees de forma automática, y alcanzas el estado en que el texto de la página se convierte directamente en lenguaje, puede suceder que algo raro te interrumpe, como un espacio exagerado entre palabras en una columna o un renglón con espacio añadido entre letras. ¿Qué ocurre mientras lees?, Gerard Unger.";
+var texto = "<b>Interletrar:</b> colocar espacios entre pares de letras, sobre todo si son mayúsculas, con objeto de compensar las distancias visualmente anormales establecidas por la prosa. <b>José Martínez de Sousa (2001)</b>";
+
+
+
+
+/* Texto Simple y con Tags ------------------------------------------------- */
+var textoSimple = texto.replace(/(<([^>]+)>)/ig,"");
+
+function funcionTextoVariable(){
+	var textoVariable = texto.match(/<b[^>]*>([\s\S]*?)<\/b>/gi);
+	var textoVariableArrayPaso1 = [];
+	$.each(textoVariable, function (index,value) {
+		textoVariableArrayPaso1.push(value.toString().replace(/"/g, "").replace(/(<([^>]+)>)/ig,"").replace(/\s/g,"").toUpperCase());
+	});
+	var textoVariableArrayPaso2 = textoVariableArrayPaso1.join("");
+	return textoVariableArrayPaso2.split('').sort();
+}
 
 
 
@@ -16,7 +32,7 @@ var texto = "Cuando lees de forma automática, y alcanzas el estado en que el te
 var glifosArrayLetras = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
 var glifosArrayAcentuadas = ["Á","É","Í","Ó","Ú","Ç","Ã","Õ","Ñ"];
 var glifosArrayNumeros = ["0","1","2","3","4","5","6","7","8","9"];
-var glifosArrayPuntuacion = ["\\.",",",";","…","-","–","—","¿","\\?","¡","!","‘","’","“","”"];
+var glifosArrayPuntuacion = ["\\.",",",";","…","-","–","—","¿","\\?","¡","!","‘","’","“","”",":","\\(","\\)"];
 
 var glifosArray = [];
 glifosArray.push.apply(glifosArray, glifosArrayLetras);
@@ -31,14 +47,14 @@ glifosArrayKeyAP.push.apply(glifosArrayKeyAP, glifosArrayPuntuacion);
 
 
 
-/* localStorage borrar anteriores ------------------------------------------ */
-localStorage.removeItem('tp_letras_v100_beta_3');
-localStorage.removeItem('cc_ap_letras_v200');
 
+/* localStorage borrar anteriores ------------------------------------------ */
+localStorage.removeItem('cc_ap_letras_v200');
+localStorage.removeItem('cc_ap_letras_v210');
 
 
 /* localStorage Nuevo Nombre ----------------------------------------------- */
-var localStorage_Nombre = "cc_ap_letras_v210";
+var localStorage_Nombre = "cc_ap_letras_v300";
 
 
 
@@ -86,11 +102,12 @@ if (!!navigator.userAgent.match(/(iPad|iPhone|iPod)/g)){
 /* Atados de teclado ------------------------------------------------------- */
 var ctrlKey = false;
 var shiftKey = false;
-var zKey = false;
 
 var spaceKey = false;
 
 var deleteKey = false;
+
+var puntoKey = false;
 
 var arrowUpKey = false;
 var arrowRightKey = false;
@@ -159,13 +176,15 @@ $(document).on('keydown keyup',function(e) {
 	if (e.which === 16) {
 		shiftKey = e.type=='keydown';
 	}
-	if (e.which === 90) {
-		zKey = e.type=='keydown';
-	}
 
 	if (e.which === 32) {
 		e.preventDefault();
 		spaceKey = e.type=='keydown';
+	}
+
+	if (e.which === 190) {
+		e.preventDefault();
+		puntoKey = e.type=='keydown';
 	}
 
 	if (e.which === 46) {
@@ -369,10 +388,6 @@ $(document).ready(function(){
 
 
 
-
-
-
-
 	/* Signos Atributos unidad px ------------------------------------------ */
 	function attr_quitar_px(valor){
 		var extension = valor.indexOf("px");
@@ -470,7 +485,9 @@ $(document).ready(function(){
 	/* Seleccion Crear ----------------------------------------------------- */
 	function seleccionCrear(objetoArray){
 
-		for (var i = 0; i < objetoArray.length; i++) {
+		var objetoArray_length = objetoArray.length;
+
+		for (var i = 0; i < objetoArray_length; i++) {
 		
 			var seleccionTop = parseFloat( $( ".seleccion" ).css("top") );
 			var seleccionLeft = parseFloat( $( ".seleccion" ).css("left") );
@@ -712,32 +729,37 @@ $(document).ready(function(){
 	/* Selector Funciones -------------------------------------------------- */
 	$("body").mousedown(function (e) {
 
-		if ( $(e.target).attr("id") == "tablero" ){
-			menuCerrar(); /* Menu */
-			seleccionBorrar();
-			deseleccionador();
-			guionBorradoDeseleccion();
-		}
+		if (!spaceKey){
 
-		if ( $(e.target).attr("id") == "hoja" || $(e.target).prop("tagName") == "BODY" ){
+			if ( $(e.target).attr("id") == "tablero" ){
+				menuCerrar(); /* Menu */
+				seleccionBorrar();
+				deseleccionador();
+				guionBorradoDeseleccion();
+			}
+
+			if ( $(e.target).attr("id") == "hoja" || $(e.target).prop("tagName") == "BODY" ){
+				
+				menuCerrar(); /* Menu */
+				seleccionBorrar();
+				deseleccionador();
+				guionBorradoDeseleccion();
+
+				$(".selector_marco").addClass("selector_activo");
+				$(".selector_marco").css({
+					'left': e.pageX,
+					'top': e.pageY
+				});
+
+				initialW = e.pageX;
+				initialH = e.pageY;
+
+				$(document).bind("mouseup", selectElements);
+				$(document).bind("mousemove", openSelector);
+			}
 			
-			menuCerrar(); /* Menu */
-			seleccionBorrar();
-			deseleccionador();
-			guionBorradoDeseleccion();
-
-			$(".selector_marco").addClass("selector_activo");
-			$(".selector_marco").css({
-				'left': e.pageX,
-				'top': e.pageY
-			});
-
-			initialW = e.pageX;
-			initialH = e.pageY;
-
-			$(document).bind("mouseup", selectElements);
-			$(document).bind("mousemove", openSelector);
 		}
+
 	});
 
 
@@ -836,7 +858,9 @@ $(document).ready(function(){
 
 		var cadenaSeleccion = [];
 
-		for (var i = 0; i < cadena.length; i++) {
+		var cadena_length = cadena.length;
+
+		for (var i = 0; i < cadena_length; i++) {
 
 			var objetoID = cadena[i];
 			var objetoIDnombre = "#"+objetoID;
@@ -880,10 +904,10 @@ $(document).ready(function(){
 				}).show();
 
 				$(".seleccion").css({					
-					'width': maxX - minX,
-					'height': maxY - minY,
-					'top': minY - $("#hoja").offset().top,
-					'left': minX - $("#hoja").offset().left
+					'width': maxX - minX, /* 'width': Math.floor(maxX - minX), */
+					'height': maxY - minY, /* 'height': Math.floor(maxY - minY), */
+					'top': minY - $("#hoja").offset().top, /* 'top': Math.floor(minY) - $("#hoja").offset().top, */
+					'left': minX - $("#hoja").offset().left /* 'left': Math.floor(minX) - $("#hoja").offset().left */
 				}).show();
 			}
 		}
@@ -1185,7 +1209,6 @@ $(document).ready(function(){
 				$(this).removeClass("seleccionado");
 				posicionRedondeoBordes ($(this));
 				detectorAlineacionBordes($(this));
-
 				localStorageCrear();
 			}
 		});
@@ -1207,7 +1230,6 @@ $(document).ready(function(){
 				$(this).removeClass("seleccionado");
 				posicionRedondeoBordes ($(this));
 				detectorAlineacionBordes($(this));
-
 				localStorageCrear();
 				estadisticas('Arrastre', 'Rotulo'); /* Analytics */
 			}
@@ -1307,6 +1329,7 @@ $(document).ready(function(){
 					}
 					if ( e.target.nodeName == "B" ){
 						guionBorrar($(this),'Mouse');
+						// guionBorradoDeseleccion();
 					}
 				}
 			}
@@ -1378,9 +1401,11 @@ $(document).ready(function(){
 			rotuloClick();
 		}
 
+
 		$(document).keydown(function (e){
 
 			var zoomFactor = zoomActual();
+			// var movimiento = redondeo( movimientoOpciones * zoomFactor );
 			var movimiento = redondeo( movimientoOpciones );
 
 			if ( tipo == "guion"){
@@ -1432,85 +1457,89 @@ $(document).ready(function(){
 
 			} else {
 
-				if($(".signo").hasClass("seleccionado") === true){
-					if (arrowUpKey){
-						$(".seleccionado").css({ "top": "-="+movimiento });
-					} else if (arrowRightKey){
-						$(".seleccionado").css({ "left": "+="+movimiento });
-					} else if (arrowDownKey){
-						$(".seleccionado").css({ "top": "+="+movimiento });
-					} else if (arrowLeftKey){
-						$(".seleccionado").css({ "left": "-="+movimiento });
-					}
-					detectorGuiasCercanas();
-					detectorAlineacionBordes(".seleccionado");
+				if ( tipo !== "reinicio"){
 
-					if (arrowUpKey || arrowRightKey || arrowDownKey || arrowLeftKey){
+					if($(".signo").hasClass("seleccionado") === true){
+						if (arrowUpKey){
+							$(".seleccionado").css({ "top": "-="+movimiento });
+						} else if (arrowRightKey){
+							$(".seleccionado").css({ "left": "+="+movimiento });
+						} else if (arrowDownKey){
+							$(".seleccionado").css({ "top": "+="+movimiento });
+						} else if (arrowLeftKey){
+							$(".seleccionado").css({ "left": "-="+movimiento });
+						}
+						detectorGuiasCercanas();
+						detectorAlineacionBordes(".seleccionado");
+
+						if (arrowUpKey || arrowRightKey || arrowDownKey || arrowLeftKey){
+							localStorageCrear();
+							estadisticas('Teclado', 'Flechas Mover Signo'); /* Analytics */
+						}
+					}
+
+					if($(".rotulo").hasClass("seleccionado") === true){
+						if (arrowUpKey){
+							$(".seleccionado").css({ "top": "-="+movimiento });
+						} else if (arrowRightKey){
+							$(".seleccionado").css({ "left": "+="+movimiento });
+						} else if (arrowDownKey){
+							$(".seleccionado").css({ "top": "+="+movimiento });
+						} else if (arrowLeftKey){
+							$(".seleccionado").css({ "left": "-="+movimiento });
+						}
+						detectorGuiasCercanas();
+						detectorAlineacionBordes(".seleccionado");
+
+						if (arrowUpKey || arrowRightKey || arrowDownKey || arrowLeftKey){
+							localStorageCrear();
+							estadisticas('Teclado', 'Flechas Mover Rotulo'); /* Analytics */
+						}
+					}
+
+					if ( $(".seleccion .conjunto div").length > 0 ){
+						if (arrowUpKey){
+							$(".seleccion").css({ "top": "-="+movimiento });
+						} else if (arrowRightKey){
+							$(".seleccion").css({ "left": "+="+movimiento });
+						} else if (arrowDownKey){
+							$(".seleccion").css({ "top": "+="+movimiento });
+						} else if (arrowLeftKey){
+							$(".seleccion").css({ "left": "-="+movimiento });
+						}
+						detectorGuiasCercanas();
+						detectorAlineacionBordes(".seleccionado");
+
+						if (arrowUpKey || arrowRightKey || arrowDownKey || arrowLeftKey){
+							localStorageCrear();
+							estadisticas('Teclado', 'Flechas Mover Seleccion'); /* Analytics */
+						}
+					}
+
+
+					/* Zoom Teclado Directo 100, 200 y 300% -------------------- */
+					if(shiftKey && n1Key){
+						zoom(1,'Teclado');
 						localStorageCrear();
-						estadisticas('Teclado', 'Flechas Mover Signo'); /* Analytics */
-					}
-				}
-
-				if($(".rotulo").hasClass("seleccionado") === true){
-					if (arrowUpKey){
-						$(".seleccionado").css({ "top": "-="+movimiento });
-					} else if (arrowRightKey){
-						$(".seleccionado").css({ "left": "+="+movimiento });
-					} else if (arrowDownKey){
-						$(".seleccionado").css({ "top": "+="+movimiento });
-					} else if (arrowLeftKey){
-						$(".seleccionado").css({ "left": "-="+movimiento });
-					}
-					detectorGuiasCercanas();
-					detectorAlineacionBordes(".seleccionado");
-
-					if (arrowUpKey || arrowRightKey || arrowDownKey || arrowLeftKey){
+						estadisticas('Teclado', 'Zoom 100%'); /* Analytics */
+					} else if(shiftKey && n2Key){
+						zoom(2,'Teclado');
 						localStorageCrear();
-						estadisticas('Teclado', 'Flechas Mover Rotulo'); /* Analytics */
-					}
-				}
-
-				if ( $(".seleccion .conjunto div").length > 0 ){
-					if (arrowUpKey){
-						$(".seleccion").css({ "top": "-="+movimiento });
-					} else if (arrowRightKey){
-						$(".seleccion").css({ "left": "+="+movimiento });
-					} else if (arrowDownKey){
-						$(".seleccion").css({ "top": "+="+movimiento });
-					} else if (arrowLeftKey){
-						$(".seleccion").css({ "left": "-="+movimiento });
-					}
-					detectorGuiasCercanas();
-					detectorAlineacionBordes(".seleccionado");
-
-					if (arrowUpKey || arrowRightKey || arrowDownKey || arrowLeftKey){
+						estadisticas('Teclado', 'Zoom 200%'); /* Analytics */
+					} else if(shiftKey && n3Key){
+						zoom(3,'Teclado');
 						localStorageCrear();
-						estadisticas('Teclado', 'Flechas Mover Seleccion'); /* Analytics */
+						estadisticas('Teclado', 'Zoom 300%'); /* Analytics */
 					}
-				}
 
 
-				/* Zoom Teclado Directo 100, 200 y 75% -------------------- */
-				if(shiftKey && n1Key){
-					zoom(1);
-					localStorageCrear();
-					estadisticas('Teclado', 'Zoom 100%'); /* Analytics */
-				} else if(shiftKey && n2Key){
-					zoom(2);
-					localStorageCrear();
-					estadisticas('Teclado', 'Zoom 200%'); /* Analytics */
-				} else if(shiftKey && n3Key){
-					zoom(0.75);
-					localStorageCrear();
-					estadisticas('Teclado', 'Zoom 75%'); /* Analytics */
-				}
+					/* Zoom Teclado Mas y Menos --------------------------------*/
+					if( (shiftKey && maspKey) || (shiftKey && masKey) ){
+						zoomMas('Teclado');
+					} else if( (shiftKey && menospKey) || (shiftKey && menosKey) ){
+						zoomMenos('Teclado');
+					}
 
-
-				/* Zoom Teclado Mas y Menos --------------------------------*/
-				if( (shiftKey && maspKey) || (shiftKey && masKey) ){
-					zoomMas('Teclado');
-				} else if( (shiftKey && menospKey) || (shiftKey && menosKey) ){
-					zoomMenos('Teclado');
 				}
 
 			}
@@ -1583,6 +1612,12 @@ $(document).ready(function(){
 			return "comilladoblea";
 		} else if (original == "”"){
 			return "comilladoblec";
+		} else if (original == ":"){
+			return "dospuntos";
+		} else if (original == "\("){
+			return "parentesisa";
+		} else if (original == "\)"){
+			return "parentesisc";
 		} else {
 			return original;
 		}
@@ -1635,6 +1670,12 @@ $(document).ready(function(){
 			return "“";
 		} else if (original == "comilladoblec"){
 			return "”";
+		} else if (original == "dospuntos"){
+			return ":";
+		} else if (original == "parentesisa"){
+			return "\(";
+		} else if (original == "parentesisc"){
+			return "\)";
 		} else {
 			return original;
 		}
@@ -1645,14 +1686,37 @@ $(document).ready(function(){
 
 	/* Creador de Signos --------------------------------------------------- */
 	function signosCreador(){
-		$.each(glifosArray, function(index,value) {
-			glifosContador(texto,value);
+		$.each(glifosArray, function (index,value) {
+			glifosContador(textoSimple,value);
 		});
+
+		/* LLamado Funcion Variables Signos */
+		var textoVariableArray = funcionTextoVariable();
+
 		/* Signos Duplicacion */
-		for ( var i=0; i<glifosArray.length; i++ ){
+		var glifosArray_length = glifosArray.length;
+
+		for ( var i=0; i<glifosArray_length; i++ ){
 			if (glifosTextoCompleto[i] !== 0){
 				for ( var j=0; j<glifosTextoCompleto[i]; j++ ){
-					$(".original").clone().removeClass("original").addClass("signo").attr("data-letra",glifosReemplazos(glifosArray[i].replace(/\\/g,''))).append('<span class="objeto">'+glifosArray[i].replace(/\\/g,'')+'</span>').appendTo("#hoja").show();
+
+					/* Variables Signos */
+					if (typeof textoVariableArray !== 'undefined' && textoVariableArray.length > 0) {
+						var signoVariableVerificador = glifosArray[i];
+						signoVariableVerificador = signoVariableVerificador.replace(/\\/g,"");
+						var SignoVariableBuscar = textoVariableArray.indexOf(signoVariableVerificador);
+
+						if (SignoVariableBuscar > -1) {
+							textoVariableArray.splice(SignoVariableBuscar, 1);
+							var SignoVariableData = "bold";
+						} else {
+							var SignoVariableData = "regular";
+						}
+					} else {
+						var SignoVariableData = "regular";
+					}
+
+					$(".original").clone().removeClass("original").addClass("signo").attr("data-letra",glifosReemplazos(glifosArray[i].replace(/\\/g,''))).attr("data-variable",SignoVariableData).append('<span class="objeto">'+glifosArray[i].replace(/\\/g,'')+'</span>').appendTo("#hoja").show();
 				}
 			}
 		}
@@ -1691,7 +1755,7 @@ $(document).ready(function(){
 		}
 
 		var guionIDfinal = "guion_" + guionIDnumero;
-		$(".original").clone().removeClass("original").addClass("guion").attr("data-letra","-").attr("id",guionIDfinal).append('<span class="objeto">-</span>').appendTo("#hoja").show();
+		$(".original").clone().removeClass("original").addClass("guion").attr("data-letra","-").attr("data-variable","regular").attr("id",guionIDfinal).append('<span class="objeto">-</span>').appendTo("#hoja").show();
 		
 		var zoom = zoomActual();
 
@@ -1763,20 +1827,20 @@ $(document).ready(function(){
 		} else if (GuionEfecto == "bicicleta"){
 			$("#hoja").append('<div id="guion_bicicleta" class="guion_animacion"><img src="img/animacion_bicicleta.svg" alt="" width="30" height="30"></div>');
 			$( "#guion_bicicleta" ).animate({ "top":"76px" }, {
-			    step: function(now,fx) {
-			      $(this).css('transform','rotate(90deg)');  
-			    },
-			    duration:'slow'
+				step: function(now,fx) {
+				  $(this).css('transform','rotate(90deg)');  
+				},
+				duration:'slow'
 			},'linear').animate({ "left": "44px" }, {
-			    step: function(now,fx) {
-			      $(this).css('transform','rotate(0deg)');
-			    },
-			    duration:'500'
+				step: function(now,fx) {
+				  $(this).css('transform','rotate(0deg)');
+				},
+				duration:'500'
 			},'linear').delay( 600 ).animate({ "left": "800px", "opacity": "0" }, {
-			    step: function(now,fx) {
-			      $(this).css('transform','rotate(-30deg)');  
-			    }, duration:'slow',
-			    complete: function(){$(this).remove();}
+				step: function(now,fx) {
+				  $(this).css('transform','rotate(-30deg)');  
+				}, duration:'slow',
+				complete: function(){$(this).remove();}
 			});
 			$(objeto).delay( 1200 ).animate({ "opacity": "1" }, "fast");
 
@@ -1800,7 +1864,8 @@ $(document).ready(function(){
 
 		guionBorradoDeseleccion();
 
-		for ( var i=0; i<glifosArrayLetras.length; i++ ){
+		var glifosArrayLetras_length = glifosArrayLetras.length;
+		for ( var i=0; i<glifosArrayLetras_length; i++ ){
 			var letra_seleccion = glifosArrayLetras[i].replace(/\\/g,'');
 			if(!ctrlKey && !shiftKey){
 				if (eval(letra_seleccion.toLowerCase()+"Key")){
@@ -1813,7 +1878,9 @@ $(document).ready(function(){
 				}
 			}
 		}
-		for ( var i=0; i<glifosArrayNumeros.length; i++ ){
+
+		var glifosArrayNumeros_length = glifosArrayNumeros.length;
+		for ( var i=0; i<glifosArrayNumeros_length; i++ ){
 			var numero_seleccion = glifosArrayNumeros[i];
 			if(!ctrlKey && !shiftKey){
 				if (eval("n"+numero_seleccion+"Key") || eval("n"+numero_seleccion+"pKey")){
@@ -1826,8 +1893,9 @@ $(document).ready(function(){
 				}
 			}
 		}
-		if (spaceKey && !ctrlKey && !shiftKey){
-			for ( var i=0; i<glifosArrayKeyAP.length; i++ ){
+		if (puntoKey && !ctrlKey && !shiftKey){
+			var glifosArrayKeyAP_length = glifosArrayKeyAP.length;
+			for ( var i=0; i<glifosArrayKeyAP_length; i++ ){
 				var ap_seleccion = glifosReemplazos(glifosArrayKeyAP[i].replace(/\\/g,''));
 				$(".signo").each(function(){
 					if ($(this).attr("data-letra") == ap_seleccion){
@@ -2121,6 +2189,62 @@ $(document).ready(function(){
 
 
 
+	/* Scroll Mano Teclado ------------------------------------------------- */
+	$(document).keydown(function (e){
+		if (spaceKey){
+			if( !$("#hoja_tapa_scroll").length ){
+				$("#hoja").prepend( '<div id="hoja_tapa_scroll"></div>' );
+			}
+		}
+	});
+	$(document).keyup(function (e){
+		if($("#hoja_tapa_scroll").length){
+			$("#hoja_tapa_scroll").remove();
+		}
+	});
+
+	function scrollManoTeclado () {
+		var cursorDown = false;
+		var hojaYPos = 0;
+		var hojaXPos = 0;
+		var cursorYPos = 0;
+		var cursorXPos = 0;
+
+		$("#hoja").mousemove(function (m){
+			if (spaceKey){
+				if(cursorDown === true){
+					$("#tablero").scrollTop( hojaYPos + (cursorYPos - m.pageY) ); 
+					$("#tablero").scrollLeft( hojaXPos + (cursorXPos - m.pageX) );
+				}
+			}
+		});
+
+		$("#hoja").mousedown(function (m){
+			if (spaceKey){
+				cursorDown = true;
+				hojaYPos = $("#tablero").scrollTop();
+				hojaXPos = $("#tablero").scrollLeft();
+				cursorYPos = m.pageY;
+				cursorXPos = m.pageX;
+				estadisticas('Teclado', 'Scroll Mano'); /* Analytics */
+			}
+		});
+
+		$(window).mouseup(function(){
+			if (spaceKey){
+				cursorDown = false;
+			}
+		});
+	}
+	scrollManoTeclado();
+
+
+
+
+
+
+
+
 	/* Zoom actual --------------------------------------------------------- */
 	function zoomActual () {
 		var zoom = parseFloat( $( "#hoja" ).attr("data-zoom") / 100);
@@ -2150,6 +2274,12 @@ $(document).ready(function(){
 
 		var hojaAlto = parseFloat( $( "#hoja" ).css("height") );
 		var hojaAncho = parseFloat( $( "#hoja" ).css("width") );
+
+		var hojaTop = parseFloat( $("#hoja").offset().top );
+		var hojaLeft = parseFloat( $("#hoja").offset().left );
+
+		var tableroTop = parseFloat( $("#tablero").offset().top );
+		var tableroLeft = parseFloat( $("#tablero").offset().left );
 
 		var signoSize = parseFloat( $( ".signo" ).css("font-size") );
 		var rotuloSize = parseFloat( $( ".rotulo" ).css("font-size") );
@@ -2195,14 +2325,12 @@ $(document).ready(function(){
 
 		$(".guia_horizontal_duplicada").each(function () {
 			$( this ).css({
-				"height": parseFloat( $( this ).css("height") ) * factor +"px",
 				"top": parseFloat( $( this ).css("top") ) * factor +"px"
 			});
 		});
 		$(".guia_vertical_duplicada").each(function () {
 			$( this ).css({
-				"left": parseFloat( $( this ).css("left") ) * factor +"px",
-				"width": parseFloat( $( this ).css("width") ) * factor +"px"
+				"left": parseFloat( $( this ).css("left") ) * factor +"px"
 			});
 		});
 
@@ -2229,11 +2357,42 @@ $(document).ready(function(){
 		var cssTextShadow = ".signo:hover span, .guion:hover span, .rotulo:hover, .seleccion .signo span, .seleccion .guion span, .seleccion .rotulo span, .seleccion:hover .elemento, .grupo:hover .agrupado{text-shadow: -"+factorTextShadow+"px 0 #99CC33, 0 "+factorTextShadow+"px #99CC33, "+factorTextShadow+"px 0 #99CC33, 0 -"+factorTextShadow+"px #99CC33 !important; } .signo.guia_cercana span, .guion.guia_cercana span, .rotulo.guia_cercana span, .seleccion.guia_cercana .conjunto .elemento span, .grupo.guia_cercana .subgrupo .agrupado span{text-shadow: -"+factorTextShadow+"px 0 rgba(74,255,255,1), 0 "+factorTextShadow+"px rgba(74,255,255,1), "+factorTextShadow+"px 0 rgba(74,255,255,1), 0 -"+factorTextShadow+"px rgba(74,255,255,1) !important; }";
 		estilosHTML.html(cssSeleccion+cssTextShadow);
 
-		/* Scroll Centrar */
-		$( "#tablero" ).scrollTop( parseFloat( $("#hoja").height() / 2 ) - ( $("#tablero").height() / 2 ) );
-		$( "#tablero" ).scrollLeft( parseFloat( $("#hoja").width() / 2 ) - ( $("#tablero").width() / 2 ) );
 
 
+
+		if (origenZoom == "recarga"){
+			var hojaPosTop_final = Math.abs( parseFloat( $("#hoja").attr("data-hojay") ) ) + tableroTop;
+			var hojaPosleft_final = Math.abs( parseFloat( $("#hoja").attr("data-hojax") ) ) + tableroLeft;
+		} else {
+			
+			/* Hoja y Tablero */
+			var hojaTopMitad_vieja = parseFloat( hojaAlto / 2 ) - ( $("#tablero").height() / 2 );
+			var hojaLeftMitad_vieja = parseFloat( hojaAncho / 2 ) - ( $("#tablero").width() / 2 );
+			var hojaTopMitad_nueva = parseFloat( $("#hoja").height() / 2 ) - ( $("#tablero").height() / 2 );
+			var hojaLeftMitad_nueva = parseFloat( $("#hoja").width() / 2 ) - ( $("#tablero").width() / 2 );
+
+			/* Zoom y Scroll Centrado */
+			if ( hojaAncho < parseFloat( $("#tablero").width() ) && hojaAncho > hojaAlto ){
+				var hojaPosTop_final = hojaTopMitad_nueva;
+				var hojaPosleft_final = hojaLeftMitad_nueva;
+			} else {
+				var hojaPosTop = ( Math.abs(hojaTop) - Math.abs(hojaTopMitad_vieja) + tableroTop ) * ( $("#hoja").height() / hojaAlto );
+				var hojaPosLeft = ( Math.abs(hojaLeft) - Math.abs(hojaLeftMitad_vieja) + tableroLeft ) * ( $("#hoja").width() / hojaAncho );
+				var hojaPosTop_final = hojaTopMitad_nueva + hojaPosTop;
+				var hojaPosleft_final = hojaLeftMitad_nueva + hojaPosLeft;
+			}
+		}
+
+		/* Aplicar Zoom */
+		$( "#tablero" ).scrollTop( hojaPosTop_final );
+		$( "#tablero" ).scrollLeft( hojaPosleft_final );
+
+
+		/* Guardar Data */
+		$("#hoja").attr("data-hojax",hojaPosleft_final);
+		$("#hoja").attr("data-hojay",hojaPosTop_final);
+
+	
 		if (origenZoom == 'Menu' || origenZoom == 'Teclado'){
 			localStorageCrear();
 			estadisticas(origenZoom, 'Zoom '+zoom_Nuevo+'%'); /* Analytics */
@@ -2242,9 +2401,27 @@ $(document).ready(function(){
 	}
 
 
+
+	/* Scroll Guadado Automatico Posicion Zoom */
+	function scrollGuadadoAutomatico(){
+		$("#tablero").scroll(function (event) {
+			localStorageCrear();
+		});
+	}
+	scrollGuadadoAutomatico();
+	
+
+
 	function zoomMas(origen){
-		var teclado_zoom_actual = parseFloat( $("#hoja").attr("data-zoom") ) + 25;
-		if (teclado_zoom_actual > 6400){
+		var zoomData = parseFloat( $("#hoja").attr("data-zoom") );
+		if (zoomData < 100){
+			var zoomSalto = 25;
+		} else {
+			var zoomSalto = 100;
+		}
+		var teclado_zoom_actual = zoomData + zoomSalto;
+
+		if (teclado_zoom_actual > 4800){
 			return;
 		} else {
 			zoom( teclado_zoom_actual / 100 , origen);
@@ -2253,8 +2430,15 @@ $(document).ready(function(){
 	}
 
 	function zoomMenos(origen){
-		var teclado_zoom_actual = parseFloat( $("#hoja").attr("data-zoom") ) - 25;
-		if (teclado_zoom_actual < 50){
+		var zoomData = parseFloat( $("#hoja").attr("data-zoom") );
+		if (zoomData <= 100){
+			var zoomSalto = 25;
+		} else {
+			var zoomSalto = 100;
+		}
+		var teclado_zoom_actual = zoomData - zoomSalto;
+
+		if (teclado_zoom_actual < 75){
 			return;
 		} else {
 			zoom( teclado_zoom_actual / 100 , origen);
@@ -2316,18 +2500,23 @@ $(document).ready(function(){
 			var factor = zoom_100 / zoom_Actual;
 		}
 
+
+		$("#hoja").attr("data-hojax",parseFloat( $("#hoja").offset().left ) );
+		$("#hoja").attr("data-hojay",parseFloat( $("#hoja").offset().top ) );
+
+
 		attrArray.push({ tipo: "info", nombre: infoNombre, version: infoVersion, fecha: infoFecha });
 		
-		attrArray.push({ tipo: "hoja", zoom: $("#hoja").attr("data-zoom"), giro: $("#hoja").attr("data-giro"), guias: $("#hoja").attr("data-guias"), guiasbloqueo: $("#hoja").attr("data-guiasbloqueo") });
+		attrArray.push({ tipo: "hoja", zoom: $("#hoja").attr("data-zoom"), giro: $("#hoja").attr("data-giro"), hojax: $("#hoja").attr("data-hojax"), hojay: $("#hoja").attr("data-hojay"), guias: $("#hoja").attr("data-guias"), guiasbloqueo: $("#hoja").attr("data-guiasbloqueo") });
 		
 		$(".signo").each(function () {
 			var posiciones = localStoragePosicion( "#"+$(this).attr("id") );
-			attrArray.push({ tipo: "signo", id: $(this).attr("id"), left: posiciones[0] * factor, top: posiciones[1] * factor, letra: $(this).attr("data-letra") });
+			attrArray.push({ tipo: "signo", id: $(this).attr("id"), left: posiciones[0] * factor, top: posiciones[1] * factor, letra: $(this).attr("data-letra"), variable: $(this).attr("data-variable") });
 		});
 
 		$(".guion").each(function () {
 			var posiciones = localStoragePosicion( "#"+$(this).attr("id") );
-			attrArray.push({ tipo: "guion", id: $(this).attr("id"), left: posiciones[0] * factor, top: posiciones[1] * factor, letra: $(this).attr("data-letra") });
+			attrArray.push({ tipo: "guion", id: $(this).attr("id"), left: posiciones[0] * factor, top: posiciones[1] * factor, letra: $(this).attr("data-letra"), variable: $(this).attr("data-variable") });
 		});
 		
 		$(".rotulo").each(function () {
@@ -2368,24 +2557,26 @@ $(document).ready(function(){
 		var guionesArray = [];
 		var gruposArray = [];
 
-		for (var i=0; i<localStorageAttrArray.length; i++){
+		var localStorageAttrArray_length = localStorageAttrArray.length;
+
+		for (var i=0; i<localStorageAttrArray_length; i++){
 
 			if ( localStorageAttrArray[i]["tipo"] == "hoja" ){
-				$("#hoja").attr("data-giro", localStorageAttrArray[i]["giro"]).attr("data-guias", localStorageAttrArray[i]["guias"]).attr("data-guiasbloqueo", localStorageAttrArray[i]["guiasbloqueo"]);
+				$("#hoja").attr("data-giro", localStorageAttrArray[i]["giro"]).attr("data-hojax", localStorageAttrArray[i]["hojax"]).attr("data-hojay", localStorageAttrArray[i]["hojay"]).attr("data-guias", localStorageAttrArray[i]["guias"]).attr("data-guiasbloqueo", localStorageAttrArray[i]["guiasbloqueo"]);
 				if (localStorageAttrArray[i]["giro"] == "vertical") {
 					var HojaAncho = $("#hoja").width();
 					var HojaAlto = $("#hoja").height();
 					$("#hoja").addClass("hoja_no_efecto").css({
 						"height": HojaAncho,
 						"width": HojaAlto
-					});	
+					});
 				}
 				var guias_visibilidad_estado = (localStorageAttrArray[i]["guias"]);
 				var guias_bloqueo_estado = (localStorageAttrArray[i]["guiasbloqueo"]);
 			}
 
 			if ( localStorageAttrArray[i]["tipo"] == "signo" || localStorageAttrArray[i]["tipo"] == "guion" ){
-				$("#hoja").append( '<div class="'+localStorageAttrArray[i]["tipo"]+'" id="'+localStorageAttrArray[i]["id"]+'" style="top: '+localStorageAttrArray[i]["top"]+'px; left: '+localStorageAttrArray[i]["left"]+'px;" data-letra="'+localStorageAttrArray[i]["letra"]+'"><span class="objeto">'+glifosRestitucion( localStorageAttrArray[i]["letra"] )+'</span></div>' );
+				$("#hoja").append( '<div class="'+localStorageAttrArray[i]["tipo"]+'" id="'+localStorageAttrArray[i]["id"]+'" style="top: '+localStorageAttrArray[i]["top"]+'px; left: '+localStorageAttrArray[i]["left"]+'px;" data-letra="'+localStorageAttrArray[i]["letra"]+'" data-variable="'+localStorageAttrArray[i]["variable"]+'"><span class="objeto">'+glifosRestitucion( localStorageAttrArray[i]["letra"] )+'</span></div>' );
 			}
 
 			if ( localStorageAttrArray[i]["tipo"] == "rotulo" ){
@@ -2408,7 +2599,7 @@ $(document).ready(function(){
 		}
 
 
-		zoom( parseFloat(localStorageAttrArray[1]["zoom"]) / 100 );
+		zoom( parseFloat(localStorageAttrArray[1]["zoom"]) / 100, "recarga" );
 
 		/* Activacion objetos */
 		arrastreSignos();
@@ -2420,12 +2611,17 @@ $(document).ready(function(){
 		guiasVisibilidad(guias_visibilidad_estado);
 		guiasBloqueo(guias_bloqueo_estado);
 
-		for (var i=0; i<guionesArray.length; i++){
+		var guionesArray_length = guionesArray.length;
+
+		for (var i=0; i<guionesArray_length; i++){
 			arrastreGuiones( guionesArray[i] );
 			guionClick( guionesArray[i] );
 			tecladoMover("guion",guionesArray[i]);
 		}
-		for (var i=0; i<gruposArray.length; i++){
+
+		var gruposArray_length = gruposArray.length;
+
+		for (var i=0; i<gruposArray_length; i++){
 			selectElements( gruposArray[i], "agregar" );
 			grupoCrear("recarga");
 			deseleccionador();
@@ -2441,7 +2637,7 @@ $(document).ready(function(){
 
 
 	/* Iniciar funciones construccion  ------------------------------------- */
-	function inicio(){
+	function inicio(origen){
 		/* Crea Signos */
 		signosCreador();
 
@@ -2457,7 +2653,7 @@ $(document).ready(function(){
 		arrastreTexto();
 
 		/* Mover Signos con el Teclado */
-		tecladoMover();
+		tecladoMover(origen);
 	}
 
 
@@ -2497,9 +2693,9 @@ $(document).ready(function(){
 			grupoBorrar( $(this).attr("id") );
 		});
 
-		zoom( 1 );
+		zoom( 1 , "reinicio" );
 
-		inicio();
+		inicio("reinicio");
 	}
 
 
@@ -2552,12 +2748,12 @@ $(document).ready(function(){
 		
 		$(".signo").each(function () {
 			var posiciones = localStoragePosicion( "#"+$(this).attr("id") );
-			pdfArray.push({ tipo: "signo", id: $(this).attr("id"), left: posiciones[0] * factor, top: posiciones[1] * factor, letra: $(this).attr("data-letra") });
+			pdfArray.push({ tipo: "signo", id: $(this).attr("id"), left: posiciones[0] * factor, top: posiciones[1] * factor, letra: $(this).attr("data-letra"), variable: $(this).attr("data-variable") });
 		});
 
 		$(".guion").each(function () {
 			var posiciones = localStoragePosicion( "#"+$(this).attr("id") );
-			pdfArray.push({ tipo: "guion", id: $(this).attr("id"), left: posiciones[0] * factor, top: posiciones[1] * factor, letra: $(this).attr("data-letra") });
+			pdfArray.push({ tipo: "guion", id: $(this).attr("id"), left: posiciones[0] * factor, top: posiciones[1] * factor, letra: $(this).attr("data-letra"), variable: $(this).attr("data-variable") });
 		});
 		
 		$(".rotulo").each(function () {
@@ -2868,9 +3064,24 @@ $(document).ready(function(){
 
 
 	/* Menu Tooltip -------------------------------------------------------- */
-	$('#menu span').tooltip();
+	$('.no-touch #menu span').tooltip();
 
 
+
+
+	/* Menu Responsive ----------------------------------------------------- */
+	$("#menu_icono").click(function(event){
+		$("#menu_caja").toggle();
+	});
+
+	$(window).bind('load resize', function(){
+		var breakpoint = window.innerWidth;
+		if (breakpoint > 768){
+			$("#menu_caja").removeAttr("style");
+		} else {
+			$("#menu ul li").removeClass("submenu_abierto");
+		}
+	});
 
 
 

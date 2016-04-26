@@ -54,6 +54,12 @@ if (isset($_POST['informacion'])){
 			return "“";
 		} else if ($original == "comilladoblec"){
 			return "”";
+		} else if ($original == "dospuntos"){
+			return ":";
+		} else if ($original == "parentesisa"){
+			return "(";
+		} else if ($original == "parentesisc"){
+			return ")";
 		} else {
 			return $original;
 		}
@@ -80,11 +86,12 @@ if (isset($_POST['informacion'])){
 		if ( $tipo == "signo" || $tipo == "guion" ){
 			$glifo_class = $tipo;
 			$glifo_id = htmlspecialchars($valor[id], ENT_QUOTES | ENT_HTML401, 'UTF-8') ;
+			$glifo_variable = htmlspecialchars($valor[variable], ENT_QUOTES | ENT_HTML401, 'UTF-8') ;
 			$glifo_left = htmlspecialchars($valor[left], ENT_QUOTES | ENT_HTML401, 'UTF-8') * $factorPDF;
 			$glifo_top = htmlspecialchars($valor[top], ENT_QUOTES | ENT_HTML401, 'UTF-8') * $factorPDF;
 			$glifo_letra = glifosRestitucion( htmlspecialchars($valor[letra], ENT_QUOTES | ENT_HTML401, 'UTF-8') );
 
-			$html .= '<div class="glifo '.$glifo_class.'" id="'.$glifo_id.'" style="left:'.$glifo_left.'px; top:'.$glifo_top.'px;">'.$glifo_letra.'</div>';
+			$html .= '<div class="glifo '.$glifo_class.' '.$glifo_variable.'" id="'.$glifo_id.'" style="left:'.$glifo_left.'px; top:'.$glifo_top.'px;">'.$glifo_letra.'</div>';
 		}
 
 		if ( $tipo == "rotulo" ){

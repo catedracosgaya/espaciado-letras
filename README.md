@@ -2,10 +2,14 @@
 Aplicación para profundizar la sensibilidad al ritmo y al espaciado a través de letras que conforman palabras y líneas pertenecientes a un mismo bloque o línea de texto.  
 El objetivo es componer una puesta en página donde convivan un bloque de color homogéneo compuesto al menos de 4 líneas, la cita del texto y el rótulo.
 
+<<<<<<< HEAD
 **Versión: 3.0.0 - (04/04/2016)**
 
 ## Aplicación en línea
 http://www.catedracosgaya.com.ar/espaciado/letras/
+=======
+**Versión: 2.3.0 - (29/09/2015)**
+>>>>>>> origin/master
 
 ## Créditos
 **Elaboración ejercicio:** Cuerpo docente de la Cátedra Cosgaya  
@@ -19,6 +23,7 @@ Web: www.catedracosgaya.com.ar
 Facebook: www.facebook.com/catedracosgaya  
 Twitter: www.twitter.com/catedracosgaya  
 
+<<<<<<< HEAD
 ##### Licencia de la aplicación
 [Está aplicación está disponible bajo la licencia MIT - Copyright (c) 2015-2016 Catedra Cosgaya.](LICENSE.md)
 
@@ -28,4 +33,12 @@ Twitter: www.twitter.com/catedracosgaya
 ##### Recursos utilizados
 Fuentes: Rosario, Chivo, Lato, Asap Symbol, Font Awesome y MFG Labs icon set  
 Bootstrap, Colorbox, dompdf, HTML5 Boilerplate, jQuery click and drag scroll, jQuery UI, jQuery UI Touch Punch, Nightly Coding, Stack Overflow  
+=======
+##### Licencias
+Esta obra está bajo una licencia de Creative Commons Reconocimiento-CompartirIgual 4.0 Internacional.
+
+##### Recursos utilizados
+Fuentes: Rosario, Chivo, Lato, Asap Symbol, Font Awesome y MFG Labs icon set  
+Bootstrap, Colorbox, dompdf, HTML5 Boilerplate, jQuery UI, jQuery UI Touch Punch, Nightly Coding, Stack Overflow
+>>>>>>> origin/master
 

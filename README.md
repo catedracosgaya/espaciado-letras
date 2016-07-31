@@ -2,7 +2,7 @@
 Aplicación para profundizar la sensibilidad al ritmo y al espaciado a través de letras que conforman palabras y líneas pertenecientes a un mismo bloque o línea de texto.  
 El objetivo es componer una puesta en página donde convivan un bloque de color homogéneo compuesto al menos de 4 líneas, la cita del texto y el rótulo.
 
-**Versión: 3.0.0 - (04/04/2016)**
+**Versión: 3.1.1 - (28/05/2016)**
 
 ## Aplicación en línea
 http://www.catedracosgaya.com.ar/espaciado/letras/

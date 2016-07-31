@@ -1,6 +1,6 @@
 /* Info -------------------------------------------------------------------- */
 var infoNombre = "Cátedra Cosgaya - Aplicación Letras";
-var infoVersion = "3.0.0";
+var infoVersion = "3.1.1";
 var infoFecha = "2016";
 
 
@@ -1921,10 +1921,15 @@ $(document).ready(function(){
 
 	/* Guias --------------------------------------------------------------- */
 	function guiasMensura (objeto) {
+		if ( $("#hoja").attr("data-giro") == "horizontal" ){
+			var hoja_ancho_cm = 42;
+		} else if ( $("#hoja").attr("data-giro") == "vertical" ){
+			var hoja_ancho_cm = 29.7;
+		}
 		if ( $(objeto).hasClass("guia_horizontal") ){
-			var calculo = ( (parseFloat($( objeto ).css("top")) * 42) / parseFloat($("#hoja").css("width")) );
+			var calculo = ( (parseFloat($( objeto ).css("top")) * hoja_ancho_cm) / parseFloat($("#hoja").css("width")) );
 		} else if ( $(objeto).hasClass("guia_vertical") ){
-			var calculo = ( (parseFloat($( objeto ).css("left")) * 42) / parseFloat($("#hoja").css("width")) );
+			var calculo = ( (parseFloat($( objeto ).css("left")) * hoja_ancho_cm) / parseFloat($("#hoja").css("width")) );
 		}
 		return +(Math.round(calculo + "e+2") + "e-2");
 	}

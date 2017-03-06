@@ -1,7 +1,7 @@
 /* Info -------------------------------------------------------------------- */
 var infoNombre = "Cátedra Cosgaya - Aplicación Letras";
-var infoVersion = "3.1.1";
-var infoFecha = "2016";
+var infoVersion = "3.2.1";
+var infoFecha = "2017";
 
 
 
@@ -51,10 +51,11 @@ glifosArrayKeyAP.push.apply(glifosArrayKeyAP, glifosArrayPuntuacion);
 /* localStorage borrar anteriores ------------------------------------------ */
 localStorage.removeItem('cc_ap_letras_v200');
 localStorage.removeItem('cc_ap_letras_v210');
+localStorage.removeItem('cc_ap_letras_v300');
 
 
 /* localStorage Nuevo Nombre ----------------------------------------------- */
-var localStorage_Nombre = "cc_ap_letras_v300";
+var localStorage_Nombre = "cc_ap_letras_v321";
 
 
 

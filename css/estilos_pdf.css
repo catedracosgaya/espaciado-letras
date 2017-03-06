@@ -33,9 +33,10 @@ body{
     color: cmyk(0,0,0,1); /* #000000; */
     display:block;
     font-family:'Rosario', sans-serif;
-    font-size:9pt;
+    font-size:9.52pt;
     font-weight:normal;
-    line-height:7.32pt;
+    letter-spacing:-0.012pt;
+    line-height:9.52pt;
     position:absolute;
     text-align:left;
     white-space:nowrap;

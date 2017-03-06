@@ -69,8 +69,7 @@ if (isset($_POST['informacion'])){
 
 
 	/* HTML --------------------------------------------------------------------- */
-	$html = '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">';
-	$html .= '<link rel="stylesheet" href="css/estilos_pdf.css">';
+	$html = '<link rel="stylesheet" href="css/estilos_pdf.css">';
 	foreach ($letrasArray as &$valor) {
 
 		$tipo = htmlspecialchars($valor[tipo], ENT_QUOTES | ENT_HTML401, 'UTF-8');

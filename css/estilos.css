@@ -260,10 +260,10 @@ body{
 .rotulo{
 	color:#000000;
 	display:block;
-	font-size:8px;
+	font-size:7.56px; /* 5.67pt */
 	height:auto !important;
 	left:0;
-	line-height:8px;
+	line-height:7.56px;
 	margin:0;
 	padding:0;
 	position:absolute;
@@ -271,7 +271,6 @@ body{
 	white-space:nowrap;
 	width:auto !important;
 	z-index:5;
-	font-variant-ligatures:no-common-ligatures;
 }
 .rotulo:hover{
 	z-index:6;

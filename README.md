@@ -2,7 +2,7 @@
 Aplicación para profundizar la sensibilidad al ritmo y al espaciado a través de letras que conforman palabras y líneas pertenecientes a un mismo bloque o línea de texto.  
 El objetivo es componer una puesta en página donde convivan un bloque de color homogéneo compuesto al menos de 4 líneas, la cita del texto y el rótulo.
 
-**Versión: 3.1.1 - (28/05/2016)**
+**Versión: 3.2.1 - (06/03/2017)**
 
 ## Aplicación en línea
 http://www.catedracosgaya.com.ar/espaciado/letras/
@@ -20,7 +20,7 @@ Facebook: www.facebook.com/catedracosgaya
 Twitter: www.twitter.com/catedracosgaya  
 
 ##### Licencia de la aplicación
-[Está aplicación está disponible bajo la licencia MIT - Copyright (c) 2015-2016 Catedra Cosgaya.](LICENSE.md)
+[Está aplicación está disponible bajo la licencia MIT - Copyright (c) 2015-2017 Catedra Cosgaya.](LICENSE.md)
 
 ##### Licencia del trabajo práctico
 [Esta obra está bajo una licencia de Creative Commons Reconocimiento-CompartirIgual 4.0 Internacional.](http://creativecommons.org/licenses/by-sa/4.0/deed.es)

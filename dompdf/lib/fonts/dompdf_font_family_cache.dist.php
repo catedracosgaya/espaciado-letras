@@ -115,9 +115,9 @@
     'italic' => DOMPDF_DIR . '/lib/fonts/Rosario-Italic',
     'bold_italic' => DOMPDF_DIR . '/lib/fonts/Rosario-BoldItalic',
   ),
-  'lato' => 
+  'alegreya sans' => 
   array (
-    'normal' => DOMPDF_DIR . '/lib/fonts/LatoLatin-Regular',
-    'bold' => DOMPDF_DIR . '/lib/fonts/LatoLatin-Black',
+    'normal' => DOMPDF_DIR . '/lib/fonts/AlegreyaSans-Regular',
+    'bold' => DOMPDF_DIR . '/lib/fonts/AlegreyaSans-Black',
   ),
 ) ?>

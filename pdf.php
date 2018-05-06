@@ -69,8 +69,7 @@ if (isset($_POST['informacion'])){
 
 
 	/* HTML --------------------------------------------------------------------- */
-	$html = '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">';
-	$html .= '<link rel="stylesheet" href="css/estilos_pdf.css">';
+	$html = '<link rel="stylesheet" href="css/estilos_pdf.css">';
 	foreach ($letrasArray as &$valor) {
 
 		$tipo = htmlspecialchars($valor[tipo], ENT_QUOTES | ENT_HTML401, 'UTF-8');
@@ -88,11 +87,15 @@ if (isset($_POST['informacion'])){
 			$glifo_class = $tipo;
 			$glifo_id = htmlspecialchars($valor[id], ENT_QUOTES | ENT_HTML401, 'UTF-8') ;
 			$glifo_variable = htmlspecialchars($valor[variable], ENT_QUOTES | ENT_HTML401, 'UTF-8') ;
+			$glifo_titulo = htmlspecialchars($valor[titulo], ENT_QUOTES | ENT_HTML401, 'UTF-8') ;
 			$glifo_left = htmlspecialchars($valor[left], ENT_QUOTES | ENT_HTML401, 'UTF-8') * $factorPDF;
 			$glifo_top = htmlspecialchars($valor[top], ENT_QUOTES | ENT_HTML401, 'UTF-8') * $factorPDF;
-			$glifo_letra = glifosRestitucion( htmlspecialchars($valor[letra], ENT_QUOTES | ENT_HTML401, 'UTF-8') );
+			$glifo_letra = htmlentities( glifosRestitucion( htmlspecialchars($valor[letra], ENT_QUOTES | ENT_HTML401, 'UTF-8') ) );
+			if ( $glifo_titulo == "" ){
+				$glifo_titulo = " texto";
+			}
 
-			$html .= '<div class="glifo '.$glifo_class.' '.$glifo_variable.'" id="'.$glifo_id.'" style="left:'.$glifo_left.'px; top:'.$glifo_top.'px;">'.$glifo_letra.'</div>';
+			$html .= '<div class="glifo '.$glifo_class.' '.$glifo_variable.' '.$glifo_titulo.'" id="'.$glifo_id.'" style="left:'.$glifo_left.'px; top:'.$glifo_top.'px;">'.$glifo_letra.'</div>';
 		}
 
 		if ( $tipo == "rotulo" ){
@@ -100,13 +103,12 @@ if (isset($_POST['informacion'])){
 			$rotulo_id = htmlspecialchars($valor[id], ENT_QUOTES | ENT_HTML401, 'UTF-8') ;
 			$rotulo_left = htmlspecialchars($valor[left], ENT_QUOTES | ENT_HTML401, 'UTF-8') * $factorPDF;
 			$rotulo_top = htmlspecialchars($valor[top], ENT_QUOTES | ENT_HTML401, 'UTF-8') * $factorPDF;
-			$rotulo_texto = htmlspecialchars($valor[texto], ENT_QUOTES | ENT_HTML401, 'UTF-8') ;
+			$rotulo_texto = htmlentities( htmlspecialchars($valor[texto], ENT_QUOTES | ENT_HTML401, 'UTF-8') );
 
 			$html .= '<div class="'.$rotulo_class.'" id="'.$rotulo_id.'" style="left:'.$rotulo_left.'px; top:'.$rotulo_top.'px;">'.$rotulo_texto.'</div>';
 		}
 
 	}
-
 
 
 

@@ -11,42 +11,17 @@
    ========================================================================== */
 
 
-
-/*@font-face {
-	font-family: 'Lato';
-	font-style: normal;
-	font-weight: 300;
-	src: local('Lato Light'), local('Lato-Light'), url(../fonts/LatoLatin-Light.woff2) format('woff2'), url(../fonts/LatoLatin-Light.woff) format('woff');
-}*/
 @font-face {
-	font-family: 'Lato';
+	font-family: 'Alegreya Sans';
 	font-style: normal;
 	font-weight: 400;
-	src: local('Lato Regular'), local('Lato-Regular'), url(../fonts/LatoLatin-Regular.woff2) format('woff2'), url(../fonts/LatoLatin-Regular.woff) format('woff');
+	src: url(../fonts/AlegreyaSans-Regular.woff2) format('woff2'), url(../fonts/AlegreyaSans-Regular.woff) format('woff');
 }
-/*@font-face {
-	font-family: 'Lato';
-	font-style: normal;
-	font-weight: 600;
-	src: local('Lato Semibold'), local('Lato-Semibold'), url(../fonts/LatoLatin-Semibold.woff2) format('woff2'), url(../fonts/LatoLatin-Semibold.woff) format('woff');
-}*/
-/*@font-face {
-	font-family: 'Lato';
-	font-style: normal;
-	font-weight: 700;
-	src: local('Lato Bold'), local('Lato-Bold'), url(../fonts/LatoLatin-Bold.woff2) format('woff2'), url(../fonts/LatoLatin-Bold.woff) format('woff');
-}*/
-/*@font-face {
-	font-family: 'Lato';
-	font-style: normal;
-	font-weight: 800;
-	src: local('Lato Heavy'), local('Lato-Heavy'), url(../fonts/LatoLatin-Heavy.woff2) format('woff2'), url(../fonts/LatoLatin-Heavy.woff) format('woff');
-}*/
 @font-face {
-	font-family: 'Lato';
+	font-family: 'Alegreya Sans';
 	font-style: normal;
 	font-weight: 900;
-	src: local('Lato Black'), local('Lato-Black'), url(../fonts/LatoLatin-Black.woff2) format('woff2'), url(../fonts/LatoLatin-Black.woff) format('woff');
+	src: url(../fonts/AlegreyaSans-Black.woff2) format('woff2'), url(../fonts/AlegreyaSans-Black.woff) format('woff');
 }
 
 
@@ -54,38 +29,38 @@
 	font-family: 'Rosario';
 	font-style: normal;
 	font-weight: 400;
-	src: local('Rosario Regular'), local('Rosario-Regular'), url(../fonts/Rosario-Regular.woff2) format('woff2'), url(../fonts/Rosario-Regular.woff) format('woff');
+	src: url(../fonts/Rosario-Regular.woff2) format('woff2'), url(../fonts/Rosario-Regular.woff) format('woff');
 }
 @font-face {
 	font-family: 'Rosario';
 	font-style: normal;
 	font-weight: 700;
-	src: local('Rosario Bold'), local('Rosario-Bold'), url(../fonts/Rosario-Bold.woff2) format('woff2'), url(../fonts/Rosario-Bold.woff) format('woff');
+	src: url(../fonts/Rosario-Bold.woff2) format('woff2'), url(../fonts/Rosario-Bold.woff) format('woff');
 }
 @font-face {
 	font-family: 'Rosario';
 	font-style: italic;
 	font-weight: 400;
-	src: local('Rosario Italic'), local('Rosario-Italic'), url(../fonts/Rosario-Italic.woff2) format('woff2'), url(../fonts/Rosario-Italic.woff) format('woff');
+	src: url(../fonts/Rosario-Italic.woff2) format('woff2'), url(../fonts/Rosario-Italic.woff) format('woff');
 }
 @font-face {
 	font-family: 'Rosario';
 	font-style: italic;
 	font-weight: 700;
-	src: local('Rosario Bold Italic'), local('Rosario-BoldItalic'), url(../fonts/Rosario-BoldItalic.woff2) format('woff2'), url(../fonts/Rosario-BoldItalic.woff) format('woff');
+	src: url(../fonts/Rosario-BoldItalic.woff2) format('woff2'), url(../fonts/Rosario-BoldItalic.woff) format('woff');
 }
 
 @font-face {
 	font-family: 'Chivo';
 	font-style: normal;
 	font-weight: 400;
-	src: local('Chivo Regular'), local('Chivo-Regular'), url(../fonts/Chivo-Regular.woff2) format('woff2'), url(../fonts/Chivo-Regular.woff) format('woff');
+	src: url(../fonts/Chivo-Regular.woff2) format('woff2'), url(../fonts/Chivo-Regular.woff) format('woff');
 }
 @font-face {
 	font-family: 'Chivo';
 	font-style: normal;
 	font-weight: 700;
-	src: local('Chivo Bold'), local('Chivo-Bold'), url(../fonts/Chivo-Bold.woff2) format('woff2'), url(../fonts/Chivo-Bold.woff) format('woff');
+	src: url(../fonts/Chivo-Bold.woff2) format('woff2'), url(../fonts/Chivo-Bold.woff) format('woff');
 }
 
 
@@ -284,17 +259,22 @@ body{
 .signo,
 .guion{
 	display:block;
-	font-family:'Lato',sans-serif;
-	font-size:29px;
+	font-family:'Alegreya Sans',sans-serif;
+	font-size:34px;
 	font-weight:400;
 	height:auto !important;
-	line-height:29px;
+	line-height:34px;
 	position:absolute;
 	width:auto !important;
 	z-index:5;
 }
 .signo[data-variable="bold"]{
 	font-weight:900;
+}
+.signo[data-titulo="titulo"]{
+	font-size:68px;
+	font-weight:900;
+	line-height:68px;
 }
 .signo:hover,
 .guion:hover{
@@ -570,7 +550,7 @@ body{
 	background-color:rgba(74,255,255,0.5);
 	color:#000000;
 	display:none;
-	font-family:'Lato',sans-serif;
+	font-family:'Alegreya Sans',sans-serif;
 	font-size:9px;
 	font-weight:800;
 	left:0;
@@ -631,7 +611,7 @@ body{
 	background-color:rgba(250,255,242,0.95);
 	box-shadow: 0 0 6px rgba(0,0,0,0.4);
 	display:none;
-	font-family:'Lato',sans-serif;
+	font-family:'Alegreya Sans',sans-serif;
 	font-size:15px;
 	font-weight:400;
 	left:14px;
@@ -665,6 +645,11 @@ body{
 	color:#000000;
 }
 
+#texto h1{
+	font-size:30px;
+	margin:0 0 6px 0;
+	padding:0;
+}
 #texto p{
 	margin:0 0 10px 0;
 	padding:0;

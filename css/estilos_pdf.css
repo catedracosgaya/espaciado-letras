@@ -14,10 +14,10 @@ body{
 .glifo{
     color: cmyk(0,0,0,1); /* #000000; */
     display:block;
-    font-family:'Lato', sans-serif;
-    font-size:34.5pt;
-    font-weight:normal; /* 400 normal - 800 bold */
-    line-height:28.844pt;
+    font-family:'Alegreya Sans', sans-serif;
+    font-size:40.46pt;
+    font-weight:normal; /* 400 normal - 900 bold */
+    line-height:31pt;
     position:absolute;
     text-align:left;
     z-index:1;
@@ -25,6 +25,12 @@ body{
 
 .bold{
     font-weight:bold;
+}
+
+.titulo{
+    font-size:80.92pt;
+    font-weight:bold;
+    line-height:61.7pt;
 }
 
 
@@ -36,7 +42,7 @@ body{
     font-size:9.52pt;
     font-weight:normal;
     letter-spacing:-0.012pt;
-    line-height:9.52pt;
+    line-height:9.2pt;
     position:absolute;
     text-align:left;
     white-space:nowrap;
